@@ -18,19 +18,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.argaed.pruebaedgar.details.EmployeeDetailsActivity
+import com.argaed.pruebaedgar.main.MainActivity
 import com.argaed.pruebaedgar.model.EmployeeData
 import com.argaed.pruebaedgar.ui.theme.PruebaEdgarTheme
 
 @Composable
 fun EmployeeLayout(employeesData:List<EmployeeData>) {
     val context = LocalContext.current
-    Box(modifier = Modifier.padding(10.dp).clickable {
-        val intent = Intent(context, EmployeeDetailsActivity::class.java)
-        context.startActivity(intent)
-    }) {
+    Box(modifier = Modifier.padding(10.dp)) {
         LazyColumn(){
             items(employeesData){
-                Column {
+                Column(modifier = Modifier.clickable {
+                    val intent = Intent(context, EmployeeDetailsActivity::class.java)
+                    intent.putExtra(MainActivity.ID_EMPLOYEE, it.id.toString())
+                    context.startActivity(intent)
+                }) {
                     Row {
                         Text(text = it.id.toString())
                     }

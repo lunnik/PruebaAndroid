@@ -37,7 +37,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.argaed.pruebaedgar.R
+import com.argaed.pruebaedgar.common.preferences.getUsername
 import com.argaed.pruebaedgar.login.LoginActivity
+import com.argaed.pruebaedgar.main.MainActivity
 import com.argaed.pruebaedgar.ui.theme.PruebaEdgarTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -52,9 +54,17 @@ class SplashActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
                     val context = LocalContext.current
                     LaunchedEffect(key1 = true) {
-                        delay(3000L)
-                        val intent = Intent(context, LoginActivity::class.java)
-                        context.startActivity(intent)
+
+                        if (context.getUsername() == "12345") {
+                            delay(3000L)
+                            val intent = Intent(context, LoginActivity::class.java)
+                            context.startActivity(intent)
+                            this@SplashActivity.finish()
+                        } else {
+                            val intent = Intent(context, MainActivity::class.java)
+                            context.startActivity(intent)
+                        }
+
                     }
                     Box(
                         modifier = Modifier

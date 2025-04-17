@@ -14,6 +14,6 @@ data class EmployeeDetails(
 ) {
 
     constructor() : this(
-        profileImage = "", employeeName = "", employeeSalary = 0, id = 0, employeeAge = 0
+        profileImage = "", employeeName = "Edgar Arana", employeeSalary = 10000, id = 5, employeeAge = 50
     )
 }

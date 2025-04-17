@@ -2,6 +2,7 @@ package com.argaed.pruebaedgar.details
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,11 +30,9 @@ import com.araged.jetpack.presentation.home.failure_manage.manageEmployeeFailure
 import com.argaed.pruebaedgar.clean.core.Failure
 import com.argaed.pruebaedgar.clean.core.presentation.Status
 import com.argaed.pruebaedgar.common.EmployeeDetailsLayout
-import com.argaed.pruebaedgar.common.EmployeeLayout
 import com.argaed.pruebaedgar.common.FullScreenLoading
 import com.argaed.pruebaedgar.feature.domain.use_case.get_employee.GetEmployeeFailure
-import com.argaed.pruebaedgar.main.EmployeeState
-import com.argaed.pruebaedgar.main.MainViewModel
+import com.argaed.pruebaedgar.main.MainActivity
 import com.argaed.pruebaedgar.ui.theme.PruebaEdgarTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,7 +43,8 @@ class EmployeeDetailsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val idEmployee = intent.getStringExtra("id") ?: "1"
+            val idEmployee = intent.getStringExtra(MainActivity.ID_EMPLOYEE) ?: "1"
+            Log.e("id",idEmployee )
             PruebaEdgarTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {

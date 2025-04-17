@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,12 +30,20 @@ class HttpClientModule {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(getHeaderInterceptor())
             .connectTimeout(timeOut, TimeUnit.SECONDS)
             .readTimeout(timeOut, TimeUnit.SECONDS)
             .build()
     }
 
-
+    private fun getHeaderInterceptor() = Interceptor {
+        val newRequest = it.request().newBuilder()
+            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/115.0.0.0 Safari/537.36")
+            .header("Accept", "application/json, text/plain, */*")
+            .header("Accept-Language", "es-ES,es;q=0.9")
+            .build()
+        it.proceed(newRequest)
+    }
     @Provides
     @Singleton
     fun provideRetrofit(

@@ -1,7 +1,9 @@
 package com.argaed.pruebaedgar.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -36,6 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.argaed.pruebaedgar.R
+import com.argaed.pruebaedgar.common.preferences.saveUsername
 import com.argaed.pruebaedgar.main.MainActivity
 import com.argaed.pruebaedgar.ui.theme.PruebaEdgarTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +64,6 @@ class LoginActivity : ComponentActivity() {
 fun LoginScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     var user by remember { mutableStateOf("") }
-    val isValid by remember { mutableStateOf(true) }
     Column(modifier = modifier) {
         Box(
             modifier = Modifier
@@ -106,8 +108,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier.fillMaxWidth()
                     )
 
-                    if (user=="12345") isValid
-
                 }
             }
         }
@@ -120,12 +120,16 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         ) {
             Button(
                 onClick = {
-                    if (!isValid && user == "12345") {
-                        Toast.makeText(context, "El user debe ser 12345", Toast.LENGTH_LONG).show()
-                    } else {
+                    Log.e("user", user)
+                    if (user == "12345") {
                         val intent = Intent(context, MainActivity::class.java)
                         context.startActivity(intent)
-                    }
+                        context.saveUsername(user)
+                        val loginActivity = context as? Activity
+                        loginActivity?.finish()
+                    } else
+                        Toast.makeText(context, "El user debe ser 12345", Toast.LENGTH_LONG).show()
+
 
                 }
             ) {
@@ -134,11 +138,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         }
     }
 
-
-}
-
-@Composable
-fun ValidationLoginScreen(isValid: Boolean, user: String) {
 
 }
 

@@ -40,7 +40,7 @@ class EmployeeDataSourceRemote @Inject constructor(
                 Either.Right(GetEmployeeDetailsResponse(it.data.toEmployeeDetails()))
             }
         } catch (exception: Exception) {
-            Log.e("eeeeee", exception.message())
+            Log.e("error request", exception.message())
             val failure: GetEmployeeDetailsFailure = when (exception) {
                 is HttpException -> exception.toGetEmployeeDetailsFailure()
                 else -> GetEmployeeDetailsFailure.UnknownFailure(exception.message())
