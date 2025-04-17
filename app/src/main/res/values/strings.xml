@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">PruebaEdgar</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_employee_details">EmployeeDetailsActivity</string>
+
+
+    <string name="failure_network_connection_action">
+        Para realizar esta acción requieres tener conexión a internet
+    </string>
+    <string name="not_available_connection_dialog_title">No cuentas con internet</string>
+    <string name="not_available_connection_dialog_content">Es necesario que cuentes con una conexión a internet</string>
+    <string name="not_available_connection_dialog_negative">Cancelar</string>
+    <string name="not_available_connection_dialog_positive">Volver a intentar</string>
+
+    <string name="register_failure_not_available_network_connection">Se requiere tener conexión a internet para continuar con el registro</string>
+    <string name="failure_network_connection">No cuentas con conexión a internet</string>
+    <string name="failure_http_code">Código: %d - Mensaje: %s</string>
+    <string name="failure_unknown">Ocurrió un error: %s</string>
+    <string name="failure_not_enough_privileges">No tienes suficientes privilegios …</string>
 </resources>
